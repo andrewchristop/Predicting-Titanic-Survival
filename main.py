@@ -1,4 +1,5 @@
 import pandas as pd
+import os
 import tensorflow as tf
 import tensorflow_decision_forests as tfdf
 from sklearn.model_selection import train_test_split
@@ -21,17 +22,20 @@ test_ds = pd.concat([x_test, y_test], axis=1)
 train_ds = tfdf.keras.pd_dataframe_to_tf_dataset(train_ds, label='Survived')
 test_ds = tfdf.keras.pd_dataframe_to_tf_dataset(test_ds, label='Survived')
 
-model_1 = tfdf.keras.RandomForestModel(verbose=2)
-model_1.fit(train_ds)
-model_1.compile(metrics=["accuracy"])
-evaluation = model_1.evaluate(test_ds, return_dict=True)
-print()
+path = os.listdir('./model')
 
-for name, value in evaluation.items():
- # print(f"{name}: {value:.4f}")
- if (value >= 0.85):
-   model_1.save("./model/")
-   print(f"Model with {value:.4f} accuracy saved")
+if(len(path) == 0):
+  model_1 = tfdf.keras.RandomForestModel(verbose=2)
+  model_1.fit(train_ds)
+  model_1.compile(metrics=["accuracy"])
+  evaluation = model_1.evaluate(test_ds, return_dict=True)
+  print()
+  
+  for name, value in evaluation.items():
+   # print(f"{name}: {value:.4f}")
+   if (value >= 0.85):
+     model_1.save("./model/")
+     print(f"Model with {value:.4f} accuracy saved")
 
 #print(train_ds.info())
 #print(test_ds.info())
