@@ -28,7 +28,10 @@ evaluation = model_1.evaluate(test_ds, return_dict=True)
 print()
 
 for name, value in evaluation.items():
-  print(f"{name}: {value:.4f}")
+ # print(f"{name}: {value:.4f}")
+ if (value >= 0.85):
+   model_1.save("./model/saved_model")
+   print(f"Model with {value:.4f} accuracy saved")
 
 #print(train_ds.info())
 #print(test_ds.info())
