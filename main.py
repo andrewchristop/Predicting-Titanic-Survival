@@ -30,7 +30,7 @@ print()
 for name, value in evaluation.items():
  # print(f"{name}: {value:.4f}")
  if (value >= 0.85):
-   model_1.save("./model/saved_model")
+   model_1.save("./model/")
    print(f"Model with {value:.4f} accuracy saved")
 
 #print(train_ds.info())
