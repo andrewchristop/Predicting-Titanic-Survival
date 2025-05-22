@@ -8,7 +8,7 @@ test = pd.read_csv("./data/test.csv")
 
 #x = features, y= labels
 
-x = train[['Pclass', 'Sex', 'Age', 'SibSp', 'Parch', 'Fare', 'Cabin', 'Embarked']]
+x = train[['Pclass', 'Sex', 'Age', 'SibSp', 'Parch', 'Fare', 'Cabin']]
 y = train[['Survived']]
 
 x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.3)
