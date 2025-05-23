@@ -32,11 +32,7 @@ if(len(path) == 0):
   model_1.compile(metrics=["accuracy"])
   evaluation = model_1.evaluate(test_ds, return_dict=True)
   print()
-  
-  for name, value in evaluation.items():
-   if (value >= 0.85):
-     model_1.save("./model/")
-     print(f"Model with {value:.4f} accuracy saved")
+  model_1.save("./model/")
 
 saved = tf.keras.models.load_model('./model')
 
