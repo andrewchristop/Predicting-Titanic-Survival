@@ -20,8 +20,6 @@ x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.3)
 train_ds = pd.concat([x_train, y_train], axis=1)
 test_ds = pd.concat([x_test, y_test], axis=1)
 
-#print(train[['Survived', 'Name']])
-
 train_ds = tfdf.keras.pd_dataframe_to_tf_dataset(train_ds, label='Survived')
 test_ds = tfdf.keras.pd_dataframe_to_tf_dataset(test_ds, label='Survived')
 predict_ds = tfdf.keras.pd_dataframe_to_tf_dataset(predict_ds)
@@ -36,7 +34,6 @@ if(len(path) == 0):
   print()
   
   for name, value in evaluation.items():
-   # print(f"{name}: {value:.4f}")
    if (value >= 0.85):
      model_1.save("./model/")
      print(f"Model with {value:.4f} accuracy saved")
@@ -48,12 +45,3 @@ results = np.round(results).astype(int)
 results = pd.DataFrame(results, columns=['Survived'])
 final = pd.concat([predict[['PassengerId']], results], axis=1)
 final.to_csv('./prediction/prediction_result.csv', index=False)
-#print(final)
-#print(final.info())
-#print(predict[['PassengerId']].info())
-#print(train['Survived'].unique().tolist().sort())
-
-#print(train_ds.info())
-#print(test_ds.info())
-#print(train.info())
-#print(test.info())
